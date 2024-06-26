@@ -1,16 +1,42 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Pressable, ScrollView} from 'react-native';
+import {View, Text, Image, StyleSheet, Pressable, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
+// const transactionData = [
+//   {image: <Image source={require('../assets/apple.png')} />  ,name: 'Apple Store', id: '1', category: 'Entertainment', amount: '- $5,99'},
+//   {image: <Image source={require('../assets/spotify.png')}/>, name: 'Spotify', id: '2', category: 'Music', amount: '- $12,99'},
+//   {image: <Image source={require('../assets/moneyTransfer.png')}/> , name: 'Money Transfer', id: '3', category: 'Transaction', amount: '$300'},
+//   {image: <Image source={require('../assets/grocery.png')}/> , name: 'Grocery', id: '4', amount: '- $88'},  
+// ]
+
+// const Item = ({name, category, amount, image}) => (
+//   <View style={homeStyles.heading}>
+//     <View style={homeStyles.headerContent}>
+//       {image}
+//       <View style={homeStyles.headDetails}>
+//         <Text style={homeStyles.headerName}>{name}</Text>
+//         <Text style={homeStyles.headerText}>{category}</Text>
+//       </View>
+//       <Text style={homeStyles.headText}>{amount}</Text>
+//     </View>
+//   </View>
+// )
 
 const HomeScreen = () => {
 
-  const renderHeader = () => (
-    <Text>Transaction</Text>
-  );
+  // const renderItem = ({item}) => (
+  //   <Item name={item.name} category={item.category} amount={item.amount} />
+  // )
+
+  // const renderHeader = () => (
+  //   <View style={homeStyles.heading}>
+  //     <Text style={homeStyles.headingName}>Transaction</Text>
+  //     <Text style={homeStyles.headingText}>Sell All</Text>
+  //   </View>
+  // );
 
   return (
-    <View style={homeStyles.container}>
+    <ScrollView style={homeStyles.container}>
       <View style={homeStyles.header}>
         <View style={homeStyles.headerContent}>
           <Image style={homeStyles.headerProfile} source={require('../assets/profile.png')}/>
@@ -52,7 +78,7 @@ const HomeScreen = () => {
         </View>
         <View style={homeStyles.headerDetails}>
           <View style={homeStyles.headerIcons}>
-            <Image source={require('../assets/topUp.png')}    style={homeStyles.headerImages}
+            <Image source={require('../assets/topUp.png')} style={homeStyles.headerImages}
             />
           </View>
           <Text style={homeStyles.headerIconsText}>Topup</Text>
@@ -64,7 +90,16 @@ const HomeScreen = () => {
         <Text style={homeStyles.headingText}>Sell All</Text>
       </View>
 
-      <ScrollView
+      {/* <FlatList
+        style={homeStyles.headingDetails}
+        showsVerticalScrollIndicator={false}
+        renderItem={renderItem}
+        ListComponentHeader={renderHeader}
+        data={transactionData}
+        keyExtractor={item => item.id}
+      /> */}
+
+       <View
         style={homeStyles.headingDetails}
         showsVerticalScrollIndicator={false}>
         <View style={homeStyles.heading}>
@@ -106,8 +141,8 @@ const HomeScreen = () => {
           </View>
           <Text style={homeStyles.headText}>- $88</Text>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   )
 }
 export default HomeScreen;
@@ -141,8 +176,6 @@ const homeStyles = StyleSheet.create({
     marginBottom: 20,
   },
   headingDetails: {
-    flex: 1,
-    flexDirection: 'column',
   },
   headerDetails: {
     flexDirection: 'column',
@@ -177,7 +210,7 @@ const homeStyles = StyleSheet.create({
     fontWeight:'700',
   },
   headerIcon: {
-    backgroundColor: '#CCCCCC',
+    backgroundColor: '#EDEFEE',
     borderRadius: 40,
     width: 55,
     height: 55, 
@@ -188,7 +221,7 @@ const homeStyles = StyleSheet.create({
     marginTop: 15,
   },
   headerIcons: {
-    backgroundColor:"#CCCCCC",
+    backgroundColor:"#EDEFEE",
     width: 69,
     height: 69,
     borderRadius: 35,

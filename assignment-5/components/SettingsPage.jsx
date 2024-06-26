@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {View, FlatList, Text, StyleSheet, Switch, TouchableOpacity} from 'react-native';
+import {View, FlatList, Text, StyleSheet, Switch} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const settingsData = [
   {name: 'Language', id: '1'},
@@ -10,38 +11,38 @@ const settingsData = [
   {name: "Privacy Policy", id:'5', addSeparator: true},
 ];
 
-const Item = ({name})=> (
-  <View style={settings.item}>
-    <Text style={settings.head}>{name}</Text>
-    <Icon name="chevron-right" size={50} color="gray"/>
-    {/* <Text style={settings.sign}>{'>'}</Text> */}
-  </View>
-);
+ const Item = ({name, isDarkTheme})=> (
+    <View style={settings.item}>
+       <Text style={[settings.head, {color: isDarkTheme ? 'white': 'black'}  ]}>{name}</Text>
+     <Icon name="chevron-right" size={50} color="gray"/> 
+     </View>
+   );
 
 export default function SettingsPage() {
   // const renderItem = ({item}) => (
   //   <View style={settings.item}>
-  //     <Text style={settings.head}>{item.key}</Text>
+  //     <Text style={settings.head}>{item.name}</Text>
+  //     <Icon name="chevron-right" size={50} color="gray"/> 
   //     {item.addSeparator && <View style={settings.separator}/> }
   //   </View>
-  // );
+   //);
 
-  const renderItem = ({item}) => (
-    <>
-    <Item name={item.name} />
-    {item.addSeparator && <View style={settings.separator}/> }
-    </>
-  );
+   const renderItem = ({item}) => (
+     <>
+     <Item name={item.name} isDarkTheme={isDarkTheme} />
+     {item.addSeparator && <View style={settings.separator}/> }
+     </>
+   );
 
-  const [isEnabled, setIsEnabled] = useState(false);
+  //const [isEnabled, setIsEnabled] = useState(false);
 
-  // const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
 
   // // const toggleTheme = () => {
   // //   setIsDarkTheme(!isDarkTheme);
   // // }
 
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleTheme = () => setIsDarkTheme(previousState => !previousState);
 
   const renderHeader = () => (
     <Text 
@@ -51,12 +52,12 @@ export default function SettingsPage() {
 
   const renderFooter = () => (
     <View style={settings.themeToggle}>
-        <Text style={settings.theme}>Theme</Text>
-        <Switch
+        <Text style={[settings.theme, {color: isDarkTheme ? 'white' : 'black'}]}>Theme</Text>
+        <Switch style={{transform:[{scale:1.5}]}}
           trackColor={{false: "#767577", true: "lightgreen"}}
-          thumbColor={isEnabled ? "#f4f3f4" : "#f4f3f4"}
-          onValueChange={toggleSwitch}
-          value={isEnabled}
+          thumbColor={isDarkTheme ? "#f4f3f4" : "#f4f3f4"}
+          onValueChange={toggleTheme}
+          value={isDarkTheme}
         />
       </View>
   )
@@ -67,7 +68,7 @@ export default function SettingsPage() {
 
 
   return (
-    <View style={settings.container}>
+    <View style={[settings.container, {backgroundColor: isDarkTheme ? 'black': 'white'}]}>
       <FlatList
         showsVerticalScrollIndicator={false} 
         data={settingsData}
@@ -91,7 +92,6 @@ export default function SettingsPage() {
 const settings = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     padding: 20,
     marginTop: 50,
   },
@@ -121,10 +121,10 @@ const settings = StyleSheet.create({
     marginTop: 50,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignContent: 'center'
   },
   theme: {
     fontSize: 28,
-    marginTop: 40,
   },
   sign:{
     fontSize: 30,
