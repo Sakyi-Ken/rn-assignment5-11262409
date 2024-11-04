@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import {View, FlatList, Text, StyleSheet, Switch} from 'react-native';
+import {View, FlatList, Text, StyleSheet, Switch, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import Home from './HomeScreen';
 
 
 const settingsData = [
@@ -18,7 +20,7 @@ const settingsData = [
      </View>
    );
 
-export default function SettingsPage() {
+export default function SettingsPage({navigation}) {
   // const renderItem = ({item}) => (
   //   <View style={settings.item}>
   //     <Text style={settings.head}>{item.name}</Text>
@@ -84,7 +86,11 @@ export default function SettingsPage() {
             size={24} 
             color={isDarkTheme ? "#FFF" : "#000"} 
           />
-        </TouchableOpacity> */}
+        </TouchableOpacity> 
+      */}
+      <Pressable onPress={() => navigation.navigate('Home')}>
+        <Text>Home</Text>
+      </Pressable>
     </View>
   );
 }

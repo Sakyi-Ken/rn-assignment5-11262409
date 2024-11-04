@@ -175,8 +175,6 @@ const homeStyles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  headingDetails: {
-  },
   headerDetails: {
     flexDirection: 'column',
     gap: 10,
@@ -202,8 +200,8 @@ const homeStyles = StyleSheet.create({
   },
   headingText:{
     fontSize: 19,
-    fontWeight:'700',
     color: 'blue',
+    opacity: 0.7,
   },
   headText:{
     fontSize: 19,
